@@ -1,0 +1,156 @@
+/* ==========================================================================
+   Custom Banner Section
+   ========================================================================== */
+
+.custom-banner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.custom-banner__inner {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+}
+
+.custom-banner__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+}
+
+.custom-banner__content {
+    position: relative;
+    z-index: 2;
+    max-width: 480px;
+    padding: 60px 40px;
+}
+
+.custom-banner__heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    line-height: 1.1;
+}
+
+.custom-banner__subheading {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+    max-width: 360px;
+}
+
+/* Button */
+.custom-banner__button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    background-color: var(--btn-bg, #ffffff);
+    color: var(--btn-text, #000000);
+    border: 1px solid var(--btn-text, #000000);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.custom-banner__button-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--btn-hover-bg, #F5D547);
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    z-index: -1;
+}
+
+.custom-banner__button:hover .custom-banner__button-bg {
+    transform: translateX(0);
+}
+
+.custom-banner__button-label,
+.custom-banner__button-arrow {
+    position: relative;
+    transition: color 0.35s ease;
+}
+
+.custom-banner__button:hover .custom-banner__button-label,
+.custom-banner__button:hover .custom-banner__button-arrow {
+    color: var(--btn-hover-text, #000000);
+}
+
+.custom-banner__button-arrow {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Ticker bar */
+.custom-banner__ticker {
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 16px;
+}
+
+.custom-banner__ticker p {
+    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Mobile
+   ========================================================================== */
+
+@media screen and (max-width: 749px) {
+    .custom-banner__inner {
+        min-height: auto;
+        padding-top: 40px;
+    }
+
+    .custom-banner__bg {
+        position: relative;
+        height: auto;
+    }
+
+    .custom-banner__content {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    .custom-banner__heading {
+        font-size: 1.75rem;
+    }
+
+    .custom-banner__subheading {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .custom-banner__button {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
