@@ -9,8 +9,7 @@
 
 {{ 'custom-banner.css' | asset_url | stylesheet_tag }}
 
-<section class="custom-banner" style="--btn-bg: {{ section.settings.button_bg_color }}; --btn-hover-bg: {{ section.settings.button_hover_bg_color }}; --btn-text: {{ section.settings.button_text_color }}; --btn-hover-text: {{ section.settings.button_hover_text_color }};">
-
+<section class="custom-banner" style="--btn-bg: {{ section.settings.button_bg_color }}; --btn-hover-bg: {{ section.settings.button_hover_bg_color }}; --btn-text: {{ section.settings.button_text_color }}; --btn-hover-text: {{ section.settings.button_hover_text_color }}; --ticker-bg: {{ section.settings.ticker_bg_color }}; --ticker-text: {{ section.settings.ticker_text_color }};">
   <div class="custom-banner__canvas">
 
     {% if section.settings.top_image %}
@@ -104,6 +103,18 @@
       "id": "ticker_text",
       "label": "Ticker text",
       "default": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR"
+    },
+        {
+      "type": "color",
+      "id": "ticker_bg_color",
+      "label": "Ticker background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "ticker_text_color",
+      "label": "Ticker text color",
+      "default": "#ffffff"
     },
     {
       "type": "header",

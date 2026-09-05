@@ -120,8 +120,8 @@
 
 /* Ticker bar */
 .custom-banner__ticker {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: var(--ticker-bg, #000000);
+    color: var(--ticker-text, #ffffff);
     text-align: center;
     padding: 10px 16px;
 }
