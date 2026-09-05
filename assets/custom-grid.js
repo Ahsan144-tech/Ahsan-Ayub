@@ -8,9 +8,9 @@
  * 3. Fetch full product data on demand (via /products/{handle}.js) and render color/size
  *    options dynamically
  * 4. Handle variant matching: update price, disable unavailable combinations
- * 5. Handle Add to Cart via the Cart AJAX API
+ * 5. Handle Add to Cart via the Cart AJAX API, then redirect to the cart page
  * 6. Special rule: if the chosen variant is Black + Medium, also add the
- *    "Soft Winter Jacket" product to the cart automatically
+ *    "Soft Winter Jacket" product to the cart automatically before redirecting
  */
 
 (function () {
@@ -33,6 +33,8 @@
     navy: '#1b1f3b',
   };
 
+  // Handle of the product to auto-add when Black + Medium is selected.
+  // Must match the actual product handle (URL slug) in this store.
   var AUTO_ADD_HANDLE = 'soft-winter-jacket';
   var AUTO_ADD_TRIGGER_OPTIONS = ['black', 'medium'];
 
@@ -66,6 +68,10 @@
     modalAddToCart.addEventListener('click', handleAddToCart);
   }
 
+  /* --------------------------------------------------------------------
+     Hover card + click/tap trigger
+     -------------------------------------------------------------------- */
+
   function setupTriggers() {
     var triggers = document.querySelectorAll('[data-grid-trigger]');
 
@@ -97,6 +103,8 @@
     });
   }
 
+  // Positions the hover card relative to the trigger, flipping left/up
+  // if it would overflow the right or bottom edge of the viewport.
   function positionHovercard(trigger, hovercard, container) {
     var containerRect = container.getBoundingClientRect();
     var cardWidth = 260;
@@ -124,6 +132,10 @@
     hovercard.style.left = left;
     hovercard.style.top = top;
   }
+
+  /* --------------------------------------------------------------------
+     Modal open/close
+     -------------------------------------------------------------------- */
 
   function setupModalClose() {
     var closeEls = modal.querySelectorAll('[data-grid-modal-close]');
@@ -158,8 +170,6 @@
         renderProductDetails(product);
       })
       .catch(function (err) {
-        // Log the real error so it's visible in the console instead of only
-        // showing the generic fallback message to the shopper.
         console.error(
           '[custom-grid] Failed to load product "' + handle + '":',
           err,
@@ -176,6 +186,10 @@
     selectedOptions = {};
   }
 
+  /* --------------------------------------------------------------------
+     Fetching product data
+     -------------------------------------------------------------------- */
+
   function fetchProduct(handle) {
     if (productCache[handle]) {
       return Promise.resolve(productCache[handle]);
@@ -189,8 +203,8 @@
       .then(function (data) {
         // The /products/{handle}.js endpoint returns `options` as an array of
         // objects ({ name, position, values }), not plain strings like Liquid's
-        // product.options. Normalize to strings here so the rest of the code
-        // (which expects option NAMES as strings) doesn't need to change.
+        // product.options. Normalize to strings so the rest of the code
+        // (which expects option NAMES as strings) doesn't need special-casing.
         data.options = (data.options || []).map(function (opt) {
           return typeof opt === 'string' ? opt : opt.name;
         });
@@ -198,6 +212,10 @@
         return data;
       });
   }
+
+  /* --------------------------------------------------------------------
+     Rendering product details + options
+     -------------------------------------------------------------------- */
 
   function renderProductDetails(product) {
     modalTitle.textContent = product.title;
@@ -369,6 +387,10 @@
     return dropdown;
   }
 
+  /* --------------------------------------------------------------------
+     Variant matching + availability
+     -------------------------------------------------------------------- */
+
   function findMatchingVariant(product) {
     return product.variants.find(function (variant) {
       return product.options.every(function (optionName, index) {
@@ -428,6 +450,10 @@
     return label && label.textContent === optionName;
   }
 
+  /* --------------------------------------------------------------------
+     Add to Cart
+     -------------------------------------------------------------------- */
+
   function handleAddToCart() {
     var variantId = modalAddToCart.getAttribute('data-variant-id');
     if (!variantId) return;
@@ -442,15 +468,14 @@
         }
       })
       .then(function () {
-        modalMessage.textContent = 'Added to cart!';
+        modalMessage.textContent = 'Added to cart! Redirecting...';
         document.dispatchEvent(new CustomEvent('cart:updated'));
+        window.location.href = '/cart';
       })
       .catch(function (err) {
         console.error('[custom-grid] Add to cart failed:', err);
         modalMessage.textContent =
           'Something went wrong adding this to your cart.';
-      })
-      .finally(function () {
         modalAddToCart.disabled = false;
       });
   }
@@ -467,6 +492,7 @@
     });
   }
 
+  // Checks whether the currently selected options match the Black + Medium rule
   function shouldAutoAddJacket() {
     var values = Object.keys(selectedOptions).map(function (key) {
       return String(selectedOptions[key]).toLowerCase();
@@ -485,6 +511,10 @@
       return addToCart(jacketVariant.id, 1);
     });
   }
+
+  /* --------------------------------------------------------------------
+     Utilities
+     -------------------------------------------------------------------- */
 
   function stripHtml(html) {
     var tmp = document.createElement('div');
