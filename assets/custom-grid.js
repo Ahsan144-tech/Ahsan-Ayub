@@ -36,7 +36,7 @@
   // Handle of the product to auto-add when Black + Medium is selected.
   // Must match the actual product handle (URL slug) in this store.
   var AUTO_ADD_HANDLE = 'dark-winter-jacket';
-  var AUTO_ADD_TRIGGER_OPTIONS = ['black', 'medium'];
+  var AUTO_ADD_TRIGGER_OPTIONS = ['black', 'm'];
 
   var modal,
     modalImage,
@@ -467,11 +467,11 @@
           return addAutoAddProduct();
         }
       })
-      //   .then(function () {
-      //     modalMessage.textContent = 'Added to cart! Redirecting...';
-      //     document.dispatchEvent(new CustomEvent('cart:updated'));
-      //     window.location.href = '/cart';
-      //   })
+      .then(function () {
+        modalMessage.textContent = 'Added to cart! Redirecting...';
+        document.dispatchEvent(new CustomEvent('cart:updated'));
+        window.location.href = '/cart';
+      })
       .catch(function (err) {
         console.error('[custom-grid] Add to cart failed:', err);
         modalMessage.textContent =
