@@ -35,7 +35,7 @@
 
   // Handle of the product to auto-add when Black + Medium is selected.
   // Must match the actual product handle (URL slug) in this store.
-  var AUTO_ADD_HANDLE = 'soft-winter-jacket';
+  var AUTO_ADD_HANDLE = 'dark-winter-jacket';
   var AUTO_ADD_TRIGGER_OPTIONS = ['black', 'medium'];
 
   var modal,
