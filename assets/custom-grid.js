@@ -467,11 +467,11 @@
           return addAutoAddProduct();
         }
       })
-      .then(function () {
-        modalMessage.textContent = 'Added to cart! Redirecting...';
-        document.dispatchEvent(new CustomEvent('cart:updated'));
-        window.location.href = '/cart';
-      })
+      //   .then(function () {
+      //     modalMessage.textContent = 'Added to cart! Redirecting...';
+      //     document.dispatchEvent(new CustomEvent('cart:updated'));
+      //     window.location.href = '/cart';
+      //   })
       .catch(function (err) {
         console.error('[custom-grid] Add to cart failed:', err);
         modalMessage.textContent =
