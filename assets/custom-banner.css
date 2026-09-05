@@ -10,6 +10,87 @@
     width: 100%;
     overflow: hidden;
 }
+/* Top bar */
+.custom-banner__topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background-color: var(--topbar-bg, #F5F5F5);
+    padding: 16px 40px;
+}
+
+.custom-banner__topbar-brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    flex: 1;
+}
+
+.custom-banner__topbar-brand img {
+    max-height: 32px;
+    width: auto;
+}
+
+.custom-banner__topbar-tagline {
+    margin: 0;
+    font-size: 0.95rem;
+    text-align: center;
+    flex: 2;
+}
+
+.custom-banner__topbar-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 22px;
+    background-color: var(--topbar-btn-bg, #F5D547);
+    color: var(--topbar-btn-text, #000000);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    overflow: hidden;
+    isolation: isolate;
+    flex-shrink: 0;
+}
+
+.custom-banner__topbar-button-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--topbar-btn-hover-bg, #000000);
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    z-index: -1;
+}
+
+.custom-banner__topbar-button:hover .custom-banner__topbar-button-bg {
+    transform: translateX(0);
+}
+
+.custom-banner__topbar-button-label,
+.custom-banner__topbar-button-arrow {
+    position: relative;
+    transition: color 0.35s ease;
+}
+
+.custom-banner__topbar-button:hover .custom-banner__topbar-button-label,
+.custom-banner__topbar-button:hover .custom-banner__topbar-button-arrow {
+    color: var(--topbar-btn-hover-text, #ffffff);
+}
+
+.custom-banner__topbar-button-arrow {
+    display: inline-flex;
+    align-items: center;
+}
 
 .custom-banner__canvas {
     position: relative;

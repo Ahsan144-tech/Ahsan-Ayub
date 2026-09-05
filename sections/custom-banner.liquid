@@ -10,6 +10,41 @@
 {{ 'custom-banner.css' | asset_url | stylesheet_tag }}
 
 <section class="custom-banner" style="--btn-bg: {{ section.settings.button_bg_color }}; --btn-hover-bg: {{ section.settings.button_hover_bg_color }}; --btn-text: {{ section.settings.button_text_color }}; --btn-hover-text: {{ section.settings.button_hover_text_color }}; --ticker-bg: {{ section.settings.ticker_bg_color }}; --ticker-text: {{ section.settings.ticker_text_color }};">
+    <div class="custom-banner__topbar" style="--topbar-bg: {{ section.settings.topbar_bg_color }}; --topbar-btn-bg: {{ section.settings.topbar_button_bg_color }}; --topbar-btn-text: {{ section.settings.topbar_button_text_color }}; --topbar-btn-hover-bg: {{ section.settings.topbar_button_hover_bg_color }}; --topbar-btn-hover-text: {{ section.settings.topbar_button_hover_text_color }};">
+
+    <div class="custom-banner__topbar-brand">
+      {% if section.settings.topbar_logo %}
+        <img
+          src="{{ section.settings.topbar_logo | image_url: width: 200 }}"
+          alt="{{ shop.name }}"
+          width="{{ section.settings.topbar_logo.width }}"
+          height="{{ section.settings.topbar_logo.height }}"
+          loading="lazy"
+        >
+      {% elsif section.settings.topbar_brand_text != blank %}
+        <span>{{ section.settings.topbar_brand_text }}</span>
+      {% endif %}
+    </div>
+
+    {% if section.settings.topbar_tagline != blank %}
+      <p class="custom-banner__topbar-tagline">{{ section.settings.topbar_tagline }}</p>
+    {% endif %}
+
+    {% if section.settings.topbar_button_label != blank %}
+      <a href="{{ section.settings.topbar_button_link }}" class="custom-banner__topbar-button">
+        <span class="custom-banner__topbar-button-bg"></span>
+        <span class="custom-banner__topbar-button-label">{{ section.settings.topbar_button_label }}</span>
+        <span class="custom-banner__topbar-button-arrow" aria-hidden="true">
+          <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 1L19 6L14 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19 6H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    {% endif %}
+
+  </div>
+  
   <div class="custom-banner__canvas">
 
     {% if section.settings.top_image %}
@@ -71,6 +106,68 @@
 {
   "name": "Custom Banner",
   "settings": [
+    {
+      "type": "header",
+      "content": "Top Bar"
+    },
+    {
+      "type": "image_picker",
+      "id": "topbar_logo",
+      "label": "Logo image (overrides text if uploaded)"
+    },
+    {
+      "type": "text",
+      "id": "topbar_brand_text",
+      "label": "Brand text (used if no logo uploaded)",
+      "default": "TISSO VISON"
+    },
+    {
+      "type": "text",
+      "id": "topbar_tagline",
+      "label": "Tagline",
+      "default": "Find the ideal gift for your loved ones."
+    },
+    {
+      "type": "text",
+      "id": "topbar_button_label",
+      "label": "Button label",
+      "default": "CHOOSE GIFT"
+    },
+    {
+      "type": "url",
+      "id": "topbar_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "topbar_bg_color",
+      "label": "Top bar background",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "topbar_button_bg_color",
+      "label": "Button background (default)",
+      "default": "#F5D547"
+    },
+    {
+      "type": "color",
+      "id": "topbar_button_text_color",
+      "label": "Button text (default)",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "topbar_button_hover_bg_color",
+      "label": "Button background (hover)",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "topbar_button_hover_text_color",
+      "label": "Button text (hover)",
+      "default": "#ffffff"
+    },
     {
       "type": "header",
       "content": "Content"
