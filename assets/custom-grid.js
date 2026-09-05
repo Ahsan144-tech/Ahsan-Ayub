@@ -16,11 +16,8 @@
 (function () {
   'use strict';
 
-  // Cache fetched product JSON by handle so re-opening the same product doesn't refetch
   var productCache = {};
 
-  // Basic color-name -> hex map for swatch border color indicators.
-  // Falls back to a neutral gray for any color name not listed here.
   var COLOR_MAP = {
     black: '#000000',
     white: '#ffffff',
@@ -36,8 +33,6 @@
     navy: '#1b1f3b',
   };
 
-  // Handle of the product to auto-add when Black + Medium is selected.
-  // Adjust this if your store uses a different handle for "Soft Winter Jacket".
   var AUTO_ADD_HANDLE = 'soft-winter-jacket';
   var AUTO_ADD_TRIGGER_OPTIONS = ['black', 'medium'];
 
@@ -50,13 +45,13 @@
     modalAddToCart,
     modalMessage;
   var currentProduct = null;
-  var selectedOptions = {}; // e.g. { Color: 'Black', Size: 'Medium' }
+  var selectedOptions = {};
 
   document.addEventListener('DOMContentLoaded', init);
 
   function init() {
     modal = document.querySelector('[data-grid-modal]');
-    if (!modal) return; // section not on this page
+    if (!modal) return;
 
     modalImage = modal.querySelector('[data-grid-modal-image]');
     modalTitle = modal.querySelector('[data-grid-modal-title]');
@@ -71,10 +66,6 @@
     modalAddToCart.addEventListener('click', handleAddToCart);
   }
 
-  /* --------------------------------------------------------------------
-     Hover card + click/tap trigger
-     -------------------------------------------------------------------- */
-
   function setupTriggers() {
     var triggers = document.querySelectorAll('[data-grid-trigger]');
 
@@ -82,7 +73,6 @@
       var item = trigger.closest('.custom-grid__item');
       var hovercard = item.querySelector('[data-grid-hovercard]');
 
-      // Desktop hover: show preview card
       trigger.addEventListener('mouseenter', function () {
         if (!hovercard) return;
         positionHovercard(trigger, hovercard, item);
@@ -94,7 +84,6 @@
         hovercard.hidden = true;
       });
 
-      // Clicking the hover card itself also opens the popup
       if (hovercard) {
         hovercard.style.pointerEvents = 'auto';
         hovercard.addEventListener('click', function () {
@@ -102,18 +91,15 @@
         });
       }
 
-      // Click/tap the "+" icon: opens the popup directly (mobile has no hover state anyway)
       trigger.addEventListener('click', function () {
         openModal(trigger);
       });
     });
   }
 
-  // Positions the hover card relative to the trigger, flipping left/up
-  // if it would overflow the right or bottom edge of the viewport.
   function positionHovercard(trigger, hovercard, container) {
     var containerRect = container.getBoundingClientRect();
-    var cardWidth = 260; // matches CSS width
+    var cardWidth = 260;
     var cardHeight = hovercard.offsetHeight || 84;
     var spaceRight = window.innerWidth - containerRect.right;
     var spaceBottom = window.innerHeight - containerRect.top;
@@ -139,10 +125,6 @@
     hovercard.style.top = top;
   }
 
-  /* --------------------------------------------------------------------
-     Modal open/close
-     -------------------------------------------------------------------- */
-
   function setupModalClose() {
     var closeEls = modal.querySelectorAll('[data-grid-modal-close]');
     closeEls.forEach(function (el) {
@@ -157,7 +139,6 @@
   function openModal(trigger) {
     var handle = trigger.getAttribute('data-product-handle');
 
-    // Show basic info immediately from data attributes while full data loads
     modalTitle.textContent = trigger.getAttribute('data-product-title');
     modalPrice.textContent = trigger.getAttribute('data-product-price');
     modalImage.src = trigger.getAttribute('data-product-image');
@@ -176,7 +157,13 @@
         selectedOptions = {};
         renderProductDetails(product);
       })
-      .catch(function () {
+      .catch(function (err) {
+        // Log the real error so it's visible in the console instead of only
+        // showing the generic fallback message to the shopper.
+        console.error(
+          '[custom-grid] Failed to load product "' + handle + '":',
+          err,
+        );
         modalMessage.textContent = 'Sorry, this product could not be loaded.';
       });
   }
@@ -189,17 +176,14 @@
     selectedOptions = {};
   }
 
-  /* --------------------------------------------------------------------
-     Fetching product data
-     -------------------------------------------------------------------- */
-
   function fetchProduct(handle) {
     if (productCache[handle]) {
       return Promise.resolve(productCache[handle]);
     }
     return fetch('/products/' + handle + '.js')
       .then(function (res) {
-        if (!res.ok) throw new Error('Product fetch failed');
+        if (!res.ok)
+          throw new Error('Product fetch failed with status ' + res.status);
         return res.json();
       })
       .then(function (data) {
@@ -208,29 +192,44 @@
       });
   }
 
-  /* --------------------------------------------------------------------
-     Rendering product details + options
-     -------------------------------------------------------------------- */
-
   function renderProductDetails(product) {
     modalTitle.textContent = product.title;
     modalDescription.textContent = stripHtml(product.description).slice(0, 200);
-    modalImage.src = product.featured_image
-      ? product.featured_image.replace('.jpg', '_800x.jpg')
-      : modalImage.src;
 
-    // Default-select the first available variant's option values
+    if (product.featured_image) {
+      modalImage.src = product.featured_image.replace(
+        /(\.[a-zA-Z]+)(\?.*)?$/,
+        '_800x$1$2',
+      );
+    }
+
+    var variants = product.variants || [];
+    var options = product.options || [];
+
+    if (!variants.length) {
+      throw new Error('Product "' + product.handle + '" has no variants.');
+    }
+
     var firstAvailable =
-      product.variants.find(function (v) {
+      variants.find(function (v) {
         return v.available;
-      }) || product.variants[0];
-    product.options.forEach(function (optionName, index) {
+      }) || variants[0];
+
+    options.forEach(function (optionName, index) {
       selectedOptions[optionName] = firstAvailable.options[index];
     });
 
     modalOptions.innerHTML = '';
-    product.options.forEach(function (optionName, index) {
+
+    options.forEach(function (optionName, index) {
       var values = getUniqueOptionValues(product, index);
+
+      // Skip rendering a picker for products with only the default
+      // "Title" / "Default Title" option (i.e. no real variants to choose from).
+      if (values.length === 1 && values[0].toLowerCase() === 'default title') {
+        return;
+      }
+
       var group = buildOptionGroup(optionName, values, index, product);
       modalOptions.appendChild(group);
     });
@@ -363,10 +362,6 @@
     return dropdown;
   }
 
-  /* --------------------------------------------------------------------
-     Variant matching + availability
-     -------------------------------------------------------------------- */
-
   function findMatchingVariant(product) {
     return product.variants.find(function (variant) {
       return product.options.every(function (optionName, index) {
@@ -376,13 +371,13 @@
   }
 
   function updateVariantState(product) {
-    // Disable option buttons/dropdown entries that have no available variant
-    // given the *other* currently selected options.
-    product.options.forEach(function (optionName, index) {
+    product.options.forEach(function (optionName) {
       var buttons = modalOptions.querySelectorAll(
         '.custom-grid__swatch, .custom-grid__dropdown-option',
       );
       buttons.forEach(function (btn) {
+        if (!belongsToOption(btn, optionName)) return;
+
         var value = btn.textContent;
         var testOptions = Object.assign({}, selectedOptions);
         testOptions[optionName] = value;
@@ -400,11 +395,7 @@
           });
         });
 
-        // Only mark disabled if this button belongs to this option's group
-        // (textContent match is safe here since option values are distinct per group in practice)
-        if (belongsToOption(btn, optionName)) {
-          btn.disabled = wouldMatch && !isAvailable;
-        }
+        btn.disabled = wouldMatch && !isAvailable;
       });
     });
 
@@ -430,10 +421,6 @@
     return label && label.textContent === optionName;
   }
 
-  /* --------------------------------------------------------------------
-     Add to Cart
-     -------------------------------------------------------------------- */
-
   function handleAddToCart() {
     var variantId = modalAddToCart.getAttribute('data-variant-id');
     if (!variantId) return;
@@ -451,7 +438,8 @@
         modalMessage.textContent = 'Added to cart!';
         document.dispatchEvent(new CustomEvent('cart:updated'));
       })
-      .catch(function () {
+      .catch(function (err) {
+        console.error('[custom-grid] Add to cart failed:', err);
         modalMessage.textContent =
           'Something went wrong adding this to your cart.';
       })
@@ -466,12 +454,12 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: variantId, quantity: quantity }),
     }).then(function (res) {
-      if (!res.ok) throw new Error('Add to cart failed');
+      if (!res.ok)
+        throw new Error('Add to cart failed with status ' + res.status);
       return res.json();
     });
   }
 
-  // Checks whether the currently selected options match the Black + Medium rule
   function shouldAutoAddJacket() {
     var values = Object.keys(selectedOptions).map(function (key) {
       return String(selectedOptions[key]).toLowerCase();
@@ -490,10 +478,6 @@
       return addToCart(jacketVariant.id, 1);
     });
   }
-
-  /* --------------------------------------------------------------------
-     Utilities
-     -------------------------------------------------------------------- */
 
   function stripHtml(html) {
     var tmp = document.createElement('div');
