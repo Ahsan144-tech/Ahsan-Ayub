@@ -187,6 +187,13 @@
         return res.json();
       })
       .then(function (data) {
+        // The /products/{handle}.js endpoint returns `options` as an array of
+        // objects ({ name, position, values }), not plain strings like Liquid's
+        // product.options. Normalize to strings here so the rest of the code
+        // (which expects option NAMES as strings) doesn't need to change.
+        data.options = (data.options || []).map(function (opt) {
+          return typeof opt === 'string' ? opt : opt.name;
+        });
         productCache[handle] = data;
         return data;
       });
