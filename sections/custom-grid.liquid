@@ -80,4 +80,91 @@
           <img class="custom-grid__modal-image" data-grid-modal-image src="" alt="">
         </div>
 
-        <div
+        <div class="custom-grid__modal-details">
+          <h3 class="custom-grid__modal-title" data-grid-modal-title></h3>
+          <p class="custom-grid__modal-price" data-grid-modal-price></p>
+          <p class="custom-grid__modal-description" data-grid-modal-description></p>
+
+          <div class="custom-grid__modal-options" data-grid-modal-options>
+            {% comment %} Color / size option groups injected here dynamically by JS {% endcomment %}
+          </div>
+
+          <button type="button" class="custom-grid__modal-add-to-cart" data-grid-add-to-cart disabled>
+            <span class="custom-grid__modal-add-to-cart-bg"></span>
+            <span class="custom-grid__modal-add-to-cart-label">ADD TO CART</span>
+            <span class="custom-grid__modal-add-to-cart-arrow" aria-hidden="true">
+              <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 1L19 6L14 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19 6H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+
+          <p class="custom-grid__modal-message" data-grid-modal-message role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Custom Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Tisso vison in the wild"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_block",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "range",
+          "id": "icon_x",
+          "label": "Icon horizontal position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "icon_y",
+          "label": "Icon vertical position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 20
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Custom Grid",
+      "blocks": [
+        { "type": "product_block" },
+        { "type": "product_block" },
+        { "type": "product_block" },
+        { "type": "product_block" },
+        { "type": "product_block" },
+        { "type": "product_block" }
+      ]
+    }
+  ]
+}
+{% endschema %}
