@@ -190,6 +190,11 @@
     line-height: 1.1;
 }
 
+.custom-banner__heading--mobile,
+.custom-banner__subheading--mobile {
+    display: none;
+}
+
 .custom-banner__subheading {
     font-size: clamp(0.85rem, 1.2vw, 1rem);
     line-height: 1.5;
@@ -339,7 +344,7 @@
         left: auto;
         width: 100%;
         height: auto;
-        aspect-ratio: 3840 / 1065;
+        aspect-ratio: 375 / 265;
         object-fit: cover;
         object-position: left top;
         order: 2;
@@ -348,4 +353,14 @@
     .custom-banner__bottom-image {
         display: none;
     }
+
+          .custom-banner__heading--desktop,
+          .custom-banner__subheading--desktop {
+              display: none;
+          }
+    
+          .custom-banner__heading--mobile,
+          .custom-banner__subheading--mobile {
+              display: block;
+          }
 }

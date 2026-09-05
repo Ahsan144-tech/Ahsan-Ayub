@@ -98,13 +98,24 @@
     {% endif %}
 
     <div class="custom-banner__content">
-      {% if section.settings.heading != blank %}
-        <h2 class="custom-banner__heading">{{ section.settings.heading }}</h2>
+            {% if section.settings.heading != blank %}
+        <h2 class="custom-banner__heading custom-banner__heading--desktop">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.heading_mobile != blank or section.settings.heading != blank %}
+        <h2 class="custom-banner__heading custom-banner__heading--mobile">
+          {{ section.settings.heading_mobile | default: section.settings.heading }}
+        </h2>
       {% endif %}
 
       {% if section.settings.subheading != blank %}
-        <p class="custom-banner__subheading">{{ section.settings.subheading }}</p>
+        <p class="custom-banner__subheading custom-banner__subheading--desktop">{{ section.settings.subheading }}</p>
       {% endif %}
+      {% if section.settings.subheading_mobile != blank or section.settings.subheading != blank %}
+        <p class="custom-banner__subheading custom-banner__subheading--mobile">
+          {{ section.settings.subheading_mobile | default: section.settings.subheading }}
+        </p>
+      {% endif %}
+
 
       {% if section.settings.button_label != blank %}
         <a href="{{ section.settings.button_link }}" class="custom-banner__button">
@@ -222,6 +233,16 @@
       "id": "subheading",
       "label": "Subheading",
       "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
+    },
+        {
+      "type": "text",
+      "id": "heading_mobile",
+      "label": "Heading (mobile, optional — falls back to desktop heading if blank)"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading_mobile",
+      "label": "Subheading (mobile, optional — falls back to desktop subheading if blank)"
     },
     {
       "type": "text",
