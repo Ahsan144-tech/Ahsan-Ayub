@@ -1,8 +1,6 @@
 /* ==========================================================================
    Custom Banner Section
-   Canvas reference: 3840 x 2340 (Figma frame) — percentages below are
-   calculated from that canvas so the layout scales proportionally at
-   any screen width while staying pixel-accurate to the design.
+   Canvas reference: 3840 x 2340 (Figma frame)
    ========================================================================== */
 
 .custom-banner {
@@ -132,7 +130,6 @@
     align-items: center;
 }
 
-/* Dropdown panel — hidden entirely on desktop; desktop shows the inline versions */
 .custom-banner__topbar-panel {
     display: none;
 }
@@ -147,7 +144,6 @@
     aspect-ratio: 3840 / 2340;
 }
 
-/* Top illustration strip: top 177/2340, height 1065/2340, full width */
 .custom-banner__top-image {
     position: absolute;
     top: 7.56%;
@@ -158,7 +154,6 @@
     object-position: left top;
 }
 
-/* Bottom-right illustration: top 1178.67/2340, left 1466.67/3840 */
 .custom-banner__bottom-image {
     position: absolute;
     top: 50.4%;
@@ -169,7 +164,6 @@
     object-position: left top;
 }
 
-/* Text content: bottom-left, same vertical band as the bottom-right image */
 .custom-banner__content {
     position: absolute;
     top: 50.4%;
@@ -190,18 +184,18 @@
     line-height: 1.1;
 }
 
-.custom-banner__heading--mobile,
-.custom-banner__subheading--mobile {
-    display: none;
-}
-
 .custom-banner__subheading {
     font-size: clamp(0.85rem, 1.2vw, 1rem);
     line-height: 1.5;
     margin: 0 0 1.5em 0;
 }
 
-/* Main banner button */
+/* Mobile-specific heading/subheading hidden by default; shown only under 749px */
+.custom-banner__heading--mobile,
+.custom-banner__subheading--mobile {
+    display: none;
+}
+
 .custom-banner__button {
     position: relative;
     display: inline-flex;
@@ -330,6 +324,17 @@
         padding: 24px 20px 0;
     }
 
+    /* Swap desktop text for mobile-specific text */
+    .custom-banner__heading--desktop,
+    .custom-banner__subheading--desktop {
+        display: none;
+    }
+
+    .custom-banner__heading--mobile,
+    .custom-banner__subheading--mobile {
+        display: block;
+    }
+
     .custom-banner__button {
         position: absolute;
         bottom: 24px;
@@ -344,7 +349,7 @@
         left: auto;
         width: 100%;
         height: auto;
-        aspect-ratio: 375 / 265;
+        aspect-ratio: 375 / 264;
         object-fit: cover;
         object-position: left top;
         order: 2;
@@ -353,14 +358,4 @@
     .custom-banner__bottom-image {
         display: none;
     }
-
-          .custom-banner__heading--desktop,
-          .custom-banner__subheading--desktop {
-              display: none;
-          }
-    
-          .custom-banner__heading--mobile,
-          .custom-banner__subheading--mobile {
-              display: block;
-          }
 }
