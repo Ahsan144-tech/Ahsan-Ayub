@@ -1,23 +1,26 @@
 {% comment %}
   Custom Banner Section
-  - Editable heading, subheading, button text/link
-  - Editable button colors (default + hover)
-  - Editable background illustration (SVG/image)
-  - Bottom ticker bar with editable text
+  Canvas reference: 3840 x 2340 (Figma frame)
+  - Top illustration strip (full width)
+  - Bottom-left: text content (heading, subheading, button)
+  - Bottom-right: second illustration
+  - Ticker bar at the very bottom
 {% endcomment %}
+
 {{ 'custom-banner.css' | asset_url | stylesheet_tag }}
+
 <section class="custom-banner" style="--btn-bg: {{ section.settings.button_bg_color }}; --btn-hover-bg: {{ section.settings.button_hover_bg_color }}; --btn-text: {{ section.settings.button_text_color }}; --btn-hover-text: {{ section.settings.button_hover_text_color }};">
 
-  <div class="custom-banner__inner">
+  <div class="custom-banner__canvas">
 
-    {% if section.settings.background_image %}
+    {% if section.settings.top_image %}
       <img
-        class="custom-banner__bg"
-        src="{{ section.settings.background_image | image_url }}"
+        class="custom-banner__top-image"
+        src="{{ section.settings.top_image | image_url }}"
         alt=""
         loading="lazy"
-        width="{{ section.settings.background_image.width }}"
-        height="{{ section.settings.background_image.height }}"
+        width="{{ section.settings.top_image.width }}"
+        height="{{ section.settings.top_image.height }}"
       >
     {% endif %}
 
@@ -43,6 +46,17 @@
         </a>
       {% endif %}
     </div>
+
+    {% if section.settings.bottom_right_image %}
+      <img
+        class="custom-banner__bottom-image"
+        src="{{ section.settings.bottom_right_image | image_url }}"
+        alt=""
+        loading="lazy"
+        width="{{ section.settings.bottom_right_image.width }}"
+        height="{{ section.settings.bottom_right_image.height }}"
+      >
+    {% endif %}
 
   </div>
 
@@ -93,12 +107,17 @@
     },
     {
       "type": "header",
-      "content": "Background"
+      "content": "Images"
     },
     {
       "type": "image_picker",
-      "id": "background_image",
-      "label": "Background illustration"
+      "id": "top_image",
+      "label": "Top illustration strip"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_right_image",
+      "label": "Bottom-right illustration"
     },
     {
       "type": "header",

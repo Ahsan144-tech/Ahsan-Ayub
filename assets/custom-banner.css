@@ -1,5 +1,8 @@
 /* ==========================================================================
    Custom Banner Section
+   Canvas reference: 3840 x 2340 (Figma frame) — percentages below are
+   calculated from that canvas so the layout scales proportionally at
+   any screen width while staying pixel-accurate to the design.
    ========================================================================== */
 
 .custom-banner {
@@ -8,42 +11,59 @@
     overflow: hidden;
 }
 
-.custom-banner__inner {
+.custom-banner__canvas {
     position: relative;
     width: 100%;
-    min-height: 400px;
+    aspect-ratio: 3840 / 2340;
 }
 
-.custom-banner__bg {
+/* Top illustration strip: top 177/2340, height 1065/2340, full width */
+.custom-banner__top-image {
     position: absolute;
-    top: 0;
+    top: 7.56%;
     left: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    z-index: 1;
+    height: 45.5%;
+    object-fit: contain;
+    object-position: left top;
 }
 
+/* Bottom-right illustration: top 1178.67/2340, left 1466.67/3840 */
+.custom-banner__bottom-image {
+    position: absolute;
+    top: 50.4%;
+    left: 38.2%;
+    width: 61.8%;
+    height: 45.8%;
+    object-fit: contain;
+    object-position: left top;
+}
+
+/* Text content: bottom-left, same vertical band as the bottom-right image */
 .custom-banner__content {
-    position: relative;
-    z-index: 2;
-    max-width: 480px;
-    padding: 60px 40px;
+    position: absolute;
+    top: 50.4%;
+    left: 0;
+    width: 38.2%;
+    height: 45.8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2% 4%;
+    box-sizing: border-box;
 }
 
 .custom-banner__heading {
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
     font-weight: 700;
-    margin: 0 0 16px 0;
+    margin: 0 0 1em 0;
     line-height: 1.1;
 }
 
 .custom-banner__subheading {
-    font-size: 1rem;
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
     line-height: 1.5;
-    margin: 0 0 24px 0;
-    max-width: 360px;
+    margin: 0 0 1.5em 0;
 }
 
 /* Button */
@@ -63,6 +83,7 @@
     font-size: 0.85rem;
     overflow: hidden;
     isolation: isolate;
+    width: fit-content;
 }
 
 .custom-banner__button-bg {
@@ -113,44 +134,43 @@
 }
 
 /* ==========================================================================
-   Mobile
+   Mobile — stack vertically: top image, text, bottom image, ticker
    ========================================================================== */
 
 @media screen and (max-width: 749px) {
-    .custom-banner__inner {
-        min-height: auto;
-        padding-top: 40px;
+    .custom-banner__canvas {
+        aspect-ratio: unset;
+        display: flex;
+        flex-direction: column;
     }
 
-    .custom-banner__bg {
+    .custom-banner__top-image,
+    .custom-banner__bottom-image,
+    .custom-banner__content {
         position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
         height: auto;
     }
 
+    .custom-banner__top-image {
+        order: 1;
+        object-position: center top;
+    }
+
     .custom-banner__content {
-        position: absolute;
-        top: 40px;
-        left: 0;
-        width: 100%;
-        max-width: 100%;
-        padding: 0 20px;
+        order: 2;
         text-align: center;
-    }
-
-    .custom-banner__heading {
-        font-size: 1.75rem;
-    }
-
-    .custom-banner__subheading {
-        max-width: 100%;
-        margin-left: auto;
-        margin-right: auto;
+        padding: 24px 20px;
     }
 
     .custom-banner__button {
-        position: absolute;
-        bottom: 40px;
-        left: 50%;
-        transform: translateX(-50%);
+        margin: 0 auto;
+    }
+
+    .custom-banner__bottom-image {
+        order: 3;
+        object-position: center top;
     }
 }
