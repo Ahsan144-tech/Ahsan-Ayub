@@ -45,8 +45,8 @@
           "type": "product_block",
           "settings": {
             "product": "black-leather-bag",
-            "icon_x": 80,
-            "icon_y": 20
+            "icon_x": 65,
+            "icon_y": 60
           }
         },
         "product_block_UApTCz": {
@@ -54,14 +54,14 @@
           "settings": {
             "product": "blue-silk-tuxedo",
             "icon_x": 80,
-            "icon_y": 20
+            "icon_y": 55
           }
         },
         "product_block_K7fW9Q": {
           "type": "product_block",
           "settings": {
             "product": "chequered-red-shirt",
-            "icon_x": 80,
+            "icon_x": 60,
             "icon_y": 20
           }
         },
@@ -77,16 +77,16 @@
           "type": "product_block",
           "settings": {
             "product": "classic-varsity-top",
-            "icon_x": 80,
-            "icon_y": 20
+            "icon_x": 55,
+            "icon_y": 30
           }
         },
         "product_block_rHtreJ": {
           "type": "product_block",
           "settings": {
             "product": "dark-denim-top",
-            "icon_x": 80,
-            "icon_y": 20
+            "icon_x": 76,
+            "icon_y": 44
           }
         }
       },
