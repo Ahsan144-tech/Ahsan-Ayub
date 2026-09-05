@@ -1,0 +1,400 @@
+/* ==========================================================================
+   Custom Grid Section
+   ========================================================================== */
+
+.custom-grid {
+    width: 100%;
+    padding: 60px 40px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.custom-grid__heading {
+    text-align: center;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 400;
+    margin: 0 0 40px 0;
+}
+
+.custom-grid__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.custom-grid__item {
+    position: relative;
+    overflow: visible;
+    aspect-ratio: 1 / 1;
+}
+
+.custom-grid__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.custom-grid__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    color: #999;
+    font-size: 0.85rem;
+}
+
+/* "+" trigger icon */
+.custom-grid__trigger {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    color: #000000;
+    padding: 0;
+    transition: transform 0.2s ease;
+    z-index: 2;
+}
+
+.custom-grid__trigger:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Hover preview card */
+.custom-grid__hovercard {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    padding: 10px;
+    width: 260px;
+    pointer-events: none;
+}
+
+.custom-grid__hovercard[hidden] {
+    display: none;
+}
+
+.custom-grid__hovercard-image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.custom-grid__hovercard-title {
+    margin: 0 0 4px 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.custom-grid__hovercard-price {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Modal / Popup
+   ========================================================================== */
+
+.custom-grid__modal[hidden] {
+    display: none;
+}
+
+.custom-grid__modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-grid__modal-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.custom-grid__modal-content {
+    position: relative;
+    background-color: #ffffff;
+    width: 311px;
+    height: 447px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.custom-grid__modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: #000000;
+}
+
+.custom-grid__modal-body {
+    display: block;
+}
+.custom-grid__modal-top {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    height: 130px;
+}
+
+.custom-grid__modal-image-wrap {
+    width: 130px;
+    height: 130px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+.custom-grid__modal-info {
+    flex: 1;
+    min-width: 0;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.custom-grid__modal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+.custom-grid__modal-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.custom-grid__modal-price {
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.custom-grid__modal-description {
+    font-size: 0.75rem;
+    line-height: 1.35;
+    color: #444;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.custom-grid__modal-details {
+    width: 100%;
+}
+/* Option groups (color / size) — filled dynamically by JS */
+.custom-grid__option-group {
+    margin-bottom: 20px;
+}
+
+.custom-grid__option-label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.custom-grid__swatch-row {
+    display: flex;
+    border: 1px solid #000000;
+}
+
+.custom-grid__swatch {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border: none;
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    font-size: 1rem;
+    border-left: 4px solid var(--swatch-color, #cccccc);
+    position: relative;
+}
+
+.custom-grid__swatch:first-child {
+    border-left: 4px solid var(--swatch-color, #cccccc);
+}
+
+.custom-grid__swatch+.custom-grid__swatch {
+    border-left-width: 1px;
+    border-left-color: #000000;
+}
+
+.custom-grid__swatch[aria-pressed="true"] {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.custom-grid__swatch:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Custom size dropdown */
+.custom-grid__dropdown {
+    position: relative;
+    border: 1px solid #000000;
+}
+
+.custom-grid__dropdown-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #000000;
+}
+
+.custom-grid__dropdown-toggle .icon-down {
+    display: inline-flex;
+}
+
+.custom-grid__dropdown-toggle .icon-up {
+    display: none;
+}
+
+.custom-grid__dropdown[data-open="true"] .icon-down {
+    display: none;
+}
+
+.custom-grid__dropdown[data-open="true"] .icon-up {
+    display: inline-flex;
+}
+
+.custom-grid__dropdown-list {
+    border-top: 1px solid #000000;
+}
+
+.custom-grid__dropdown[data-open="false"] .custom-grid__dropdown-list {
+    display: none;
+}
+
+.custom-grid__dropdown-option {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #000000;
+}
+
+.custom-grid__dropdown-option[aria-selected="true"] {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.custom-grid__dropdown-option:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Add to cart button */
+.custom-grid__modal-add-to-cart {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
+    margin-top: 8px;
+}
+
+.custom-grid__modal-add-to-cart:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.custom-grid__modal-add-to-cart-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #333333;
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    z-index: -1;
+}
+
+.custom-grid__modal-add-to-cart:not(:disabled):hover .custom-grid__modal-add-to-cart-bg {
+    transform: translateX(0);
+}
+
+.custom-grid__modal-message {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    min-height: 1.2em;
+}
+
+/* ==========================================================================
+   Mobile
+   ========================================================================== */
+
+@media screen and (max-width: 749px) {
+    .custom-grid {
+        padding: 40px 16px;
+    }
+
+    .custom-grid__list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .custom-grid__hovercard {
+        display: none;}
+
+}

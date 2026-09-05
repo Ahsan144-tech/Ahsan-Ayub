@@ -9,48 +9,103 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "custom_banner_77RHpe": {
+      "type": "custom-banner",
+      "name": "Custom Banner",
+      "settings": {
+        "topbar_logo": "shopify://shop_images/Group_1000007777.png",
+        "topbar_brand_text": "TISSO VISON",
+        "topbar_tagline": "Find the ideal gift for your loved ones.",
+        "topbar_button_label": "CHOOSE GIFT",
+        "topbar_button_link": "",
+        "topbar_bg_color": "#f5f5f5",
+        "topbar_button_bg_color": "#f5d547",
+        "topbar_button_text_color": "#000000",
+        "topbar_button_hover_bg_color": "#000000",
+        "topbar_button_hover_text_color": "#ffffff",
+        "heading": "The Gift Guide",
+        "subheading": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+        "button_label": "SHOP NOW",
+        "button_link": "",
+        "ticker_text": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR",
+        "ticker_bg_color": "#f5f5f5",
+        "ticker_text_color": "#000000",
+        "top_image": "shopify://shop_images/Frame_2.svg",
+        "bottom_right_image": "shopify://shop_images/Frame_1.svg",
+        "button_bg_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_hover_bg_color": "#f5d547",
+        "button_hover_text_color": "#000000"
+      }
+    },
+    "custom_grid_cPKU3V": {
+      "type": "custom-grid",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "product_block_qj4Yc4": {
+          "type": "product_block",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "product": "black-leather-bag",
+            "icon_x": 65,
+            "icon_y": 60
           }
         },
-        "button": {
-          "type": "buttons",
+        "product_block_UApTCz": {
+          "type": "product_block",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "product": "blue-silk-tuxedo",
+            "icon_x": 80,
+            "icon_y": 55
+          }
+        },
+        "product_block_K7fW9Q": {
+          "type": "product_block",
+          "settings": {
+            "product": "chequered-red-shirt",
+            "icon_x": 60,
+            "icon_y": 20
+          }
+        },
+        "product_block_zYMdtx": {
+          "type": "product_block",
+          "settings": {
+            "product": "classic-leather-jacket",
+            "icon_x": 80,
+            "icon_y": 20
+          }
+        },
+        "product_block_XPGMTH": {
+          "type": "product_block",
+          "settings": {
+            "product": "classic-varsity-top",
+            "icon_x": 55,
+            "icon_y": 30
+          }
+        },
+        "product_block_rHtreJ": {
+          "type": "product_block",
+          "settings": {
+            "product": "dark-denim-top",
+            "icon_x": 76,
+            "icon_y": 44
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "product_block_qj4Yc4",
+        "product_block_UApTCz",
+        "product_block_K7fW9Q",
+        "product_block_zYMdtx",
+        "product_block_XPGMTH",
+        "product_block_rHtreJ"
       ],
-      "disabled": true,
+      "name": "Custom Grid",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "image_behavior": "none",
-        "desktop_content_position": "bottom-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "scheme-3",
-        "stack_images_on_mobile": false,
-        "mobile_content_alignment": "center",
-        "show_text_below": false
+        "heading": "Tisso vison in the wild"
       }
     }
   },
   "order": [
-    "image_banner"
+    "custom_banner_77RHpe",
+    "custom_grid_cPKU3V"
   ]
 }

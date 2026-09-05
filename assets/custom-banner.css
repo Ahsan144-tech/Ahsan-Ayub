@@ -1,0 +1,365 @@
+/* ==========================================================================
+   Custom Banner Section
+   Canvas reference: 3840 x 2340 (Figma frame)
+   ========================================================================== */
+
+.custom-banner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.custom-banner {
+    margin: 0;
+    padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Top bar
+   -------------------------------------------------------------------------- */
+
+.custom-banner__topbar {
+    background-color: var(--topbar-bg, #F5F5F5);
+}
+
+.custom-banner__topbar-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px 40px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.custom-banner__topbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: inherit;
+}
+
+.custom-banner__topbar-icon--close {
+    display: none;
+}
+
+.custom-banner__topbar-toggle[aria-expanded="true"] .custom-banner__topbar-icon--menu {
+    display: none;
+}
+
+.custom-banner__topbar-toggle[aria-expanded="true"] .custom-banner__topbar-icon--close {
+    display: inline-flex;
+}
+
+.custom-banner__topbar-brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    flex: 1;
+}
+
+.custom-banner__topbar-brand img {
+    max-height: 32px;
+    width: auto;
+}
+
+.custom-banner__topbar-tagline {
+    margin: 0;
+    font-size: 0.95rem;
+    text-align: center;
+    flex: 2;
+}
+
+.custom-banner__topbar-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 22px;
+    background-color: var(--topbar-btn-bg, #F5D547);
+    color: var(--topbar-btn-text, #000000);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    overflow: hidden;
+    isolation: isolate;
+    flex-shrink: 0;
+}
+
+.custom-banner__topbar-button-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--topbar-btn-hover-bg, #000000);
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    z-index: -1;
+}
+
+.custom-banner__topbar-button:hover .custom-banner__topbar-button-bg {
+    transform: translateX(0);
+}
+
+.custom-banner__topbar-button-label,
+.custom-banner__topbar-button-arrow {
+    position: relative;
+    transition: color 0.35s ease;
+}
+
+.custom-banner__topbar-button:hover .custom-banner__topbar-button-label,
+.custom-banner__topbar-button:hover .custom-banner__topbar-button-arrow {
+    color: var(--topbar-btn-hover-text, #ffffff);
+}
+
+.custom-banner__topbar-button-arrow {
+    display: inline-flex;
+    align-items: center;
+}
+
+.custom-banner__topbar-panel {
+    display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Main canvas (illustrations + text)
+   -------------------------------------------------------------------------- */
+
+.custom-banner__canvas {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3840 / 2340;
+}
+
+.custom-banner__top-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 45.5%;
+    object-fit: contain;
+    object-position: left top;
+}
+
+.custom-banner__bottom-image {
+    position: absolute;
+    top: 50.4%;
+    left: 38.2%;
+    width: 61.8%;
+    height: 45.8%;
+    object-fit: contain;
+    object-position: left top;
+}
+
+.custom-banner__content {
+    position: absolute;
+    top: 50.4%;
+    left: 0;
+    width: 38.2%;
+    height: 45.8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2% 4%;
+    box-sizing: border-box;
+}
+
+.custom-banner__heading {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700;
+    margin: 0 0 1em 0;
+    line-height: 1.1;
+}
+
+.custom-banner__subheading {
+    font-size: clamp(1.15rem, 1.2vw, 1.8rem);
+    line-height: 1.5;
+    margin: 0 0 1.5em 0;
+}
+
+/* Mobile-specific heading/subheading hidden by default; shown only under 749px */
+.custom-banner__heading--mobile,
+.custom-banner__subheading--mobile {
+    display: none;
+}
+
+.custom-banner__button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    background-color: var(--btn-bg, #ffffff);
+    color: var(--btn-text, #000000);
+    border: 1px solid var(--btn-text, #000000);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    overflow: hidden;
+    isolation: isolate;
+    width: fit-content;
+}
+
+.custom-banner__button-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--btn-hover-bg, #F5D547);
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    z-index: -1;
+}
+
+.custom-banner__button:hover .custom-banner__button-bg {
+    transform: translateX(0);
+}
+
+.custom-banner__button-label,
+.custom-banner__button-arrow {
+    position: relative;
+    transition: color 0.35s ease;
+}
+
+.custom-banner__button:hover .custom-banner__button-label,
+.custom-banner__button:hover .custom-banner__button-arrow {
+    color: var(--btn-hover-text, #000000);
+}
+
+.custom-banner__button-arrow {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   Ticker bar
+   -------------------------------------------------------------------------- */
+
+.custom-banner__ticker {
+    background-color: var(--ticker-bg, #000000);
+    color: var(--ticker-text, #ffffff);
+    text-align: center;
+    padding: 10px 16px;
+}
+
+.custom-banner__ticker p {
+    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Mobile
+   ========================================================================== */
+
+@media screen and (max-width: 749px) {
+
+    /* Top bar */
+    .custom-banner__topbar-row {
+        padding: 16px 20px;
+        justify-content: center;
+        position: relative;
+    }
+
+    .custom-banner__topbar-toggle {
+        display: inline-flex;
+        align-items: center;
+        position: absolute;
+        left: 20px;
+    }
+
+    .custom-banner__topbar-brand {
+        flex: none;
+    }
+
+    .custom-banner__topbar-tagline--desktop,
+    .custom-banner__topbar-button--desktop {
+        display: none;
+    }
+
+    .custom-banner__topbar-panel {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 20px;
+        background-color: var(--topbar-bg, #F5F5F5);
+    }
+
+    .custom-banner__topbar-panel:not([hidden]) {
+        display: flex;
+    }
+
+    /* Canvas: heading/subheading, then image with button overlaid, then ticker */
+    .custom-banner__canvas {
+        aspect-ratio: unset;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .custom-banner__content {
+        position: static;
+        width: 100%;
+        height: auto;
+        order: 1;
+        text-align: center;
+        padding: 24px 20px 0;
+    }
+
+    /* Swap desktop text for mobile-specific text */
+    .custom-banner__heading--desktop,
+    .custom-banner__subheading--desktop {
+        display: none;
+    }
+
+    .custom-banner__heading--mobile,
+    .custom-banner__subheading--mobile {
+        display: block;
+    }
+
+    .custom-banner__button {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 3;
+    }
+
+    .custom-banner__top-image {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 375 / 264;
+        object-fit: cover;
+        object-position: left top;
+        order: 2;
+    }
+
+    .custom-banner__bottom-image {
+        display: none;
+    }
+}
