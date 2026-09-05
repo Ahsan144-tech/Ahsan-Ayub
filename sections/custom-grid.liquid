@@ -75,16 +75,19 @@
         </svg>
       </button>
 
-      <div class="custom-grid__modal-body">
-        <div class="custom-grid__modal-image-wrap">
-          <img class="custom-grid__modal-image" data-grid-modal-image src="" alt="">
+    <div class="custom-grid__modal-body">
+        <div class="custom-grid__modal-top">
+          <div class="custom-grid__modal-image-wrap">
+            <img class="custom-grid__modal-image" data-grid-modal-image src="" alt="">
+          </div>
+          <div class="custom-grid__modal-info">
+            <h3 class="custom-grid__modal-title" data-grid-modal-title></h3>
+            <p class="custom-grid__modal-price" data-grid-modal-price></p>
+            <p class="custom-grid__modal-description" data-grid-modal-description></p>
+          </div>
         </div>
 
         <div class="custom-grid__modal-details">
-          <h3 class="custom-grid__modal-title" data-grid-modal-title></h3>
-          <p class="custom-grid__modal-price" data-grid-modal-price></p>
-          <p class="custom-grid__modal-description" data-grid-modal-description></p>
-
           <div class="custom-grid__modal-options" data-grid-modal-options>
             {% comment %} Color / size option groups injected here dynamically by JS {% endcomment %}
           </div>
