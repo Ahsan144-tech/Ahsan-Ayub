@@ -10,8 +10,11 @@
     width: 100%;
     overflow: hidden;
 }
-/* Top bar */
-/* Top bar */
+
+/* --------------------------------------------------------------------------
+   Top bar
+   -------------------------------------------------------------------------- */
+
 .custom-banner__topbar {
     background-color: var(--topbar-bg, #F5F5F5);
 }
@@ -36,7 +39,6 @@
     border: 0;
 }
 
-/* Hamburger/close toggle button — hidden on desktop, shown on mobile */
 .custom-banner__topbar-toggle {
     display: none;
     background: none;
@@ -130,10 +132,14 @@
     align-items: center;
 }
 
-/* Dropdown panel — hidden on desktop entirely (desktop shows inline versions) */
+/* Dropdown panel — hidden entirely on desktop; desktop shows the inline versions */
 .custom-banner__topbar-panel {
     display: none;
 }
+
+/* --------------------------------------------------------------------------
+   Main canvas (illustrations + text)
+   -------------------------------------------------------------------------- */
 
 .custom-banner__canvas {
     position: relative;
@@ -190,7 +196,7 @@
     margin: 0 0 1.5em 0;
 }
 
-/* Button */
+/* Main banner button */
 .custom-banner__button {
     position: relative;
     display: inline-flex;
@@ -242,7 +248,10 @@
     align-items: center;
 }
 
-/* Ticker bar */
+/* --------------------------------------------------------------------------
+   Ticker bar
+   -------------------------------------------------------------------------- */
+
 .custom-banner__ticker {
     background-color: var(--ticker-bg, #000000);
     color: var(--ticker-text, #ffffff);
@@ -258,10 +267,12 @@
 }
 
 /* ==========================================================================
-   Mobile — stack vertically: top image, text, bottom image, ticker
+   Mobile
    ========================================================================== */
 
 @media screen and (max-width: 749px) {
+
+    /* Top bar */
     .custom-banner__topbar-row {
         padding: 16px 20px;
         justify-content: center;
@@ -297,7 +308,7 @@
         display: flex;
     }
 
-    /* Canvas: stack as heading/subheading, then single image with button overlaid, then ticker */
+    /* Canvas: heading/subheading, then image with button overlaid, then ticker */
     .custom-banner__canvas {
         aspect-ratio: unset;
         display: flex;
@@ -306,13 +317,12 @@
     }
 
     .custom-banner__content {
-            top: auto;
-                left: auto;
-                width: 100%;
-                height: auto;
-                order: 1;
-                text-align: center;
-                padding: 24px 20px 0;
+        position: static;
+        width: 100%;
+        height: auto;
+        order: 1;
+        text-align: center;
+        padding: 24px 20px 0;
     }
 
     .custom-banner__button {
