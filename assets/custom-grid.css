@@ -159,14 +159,24 @@
 }
 .custom-grid__modal-top {
     display: flex;
-    gap: 24px;
-    margin-bottom: 32px;
+    gap: 16px;
+    margin-bottom: 20px;
+    height: 130px;
 }
 
 .custom-grid__modal-image-wrap {
-    width: 180px;
-    height: 180px;
+    width: 130px;
+    height: 130px;
     flex-shrink: 0;
+    overflow: hidden;
+}
+.custom-grid__modal-info {
+    flex: 1;
+    min-width: 0;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     overflow: hidden;
 }
 
@@ -177,27 +187,32 @@
     display: block;
 }
 
-.custom-grid__modal-info {
-    flex: 1;
-    min-width: 0;
-}
 
 .custom-grid__modal-title {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 500;
-    margin: 0 0 12px 0;
+    margin: 0;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .custom-grid__modal-price {
-    font-size: 1.25rem;
-    margin: 0 0 16px 0;
+    font-size: 0.95rem;
+    margin: 0;
 }
 
 .custom-grid__modal-description {
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-size: 0.75rem;
+    line-height: 1.35;
     color: #444;
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .custom-grid__modal-details {
@@ -380,17 +395,6 @@
     }
 
     .custom-grid__hovercard {
-        display: none;
-    }
+        display: none;}
 
-    
-    .custom-grid__modal-top {
-        gap: 16px;
-        margin-bottom: 24px;
-    }
-    
-    .custom-grid__modal-image-wrap {
-        width: 120px;
-        height: 120px;
-    }
 }
