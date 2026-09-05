@@ -28,18 +28,84 @@
         "button_label": "SHOP NOW",
         "button_link": "",
         "ticker_text": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR",
-        "ticker_bg_color": "#F5F5F5",
+        "ticker_bg_color": "#f5f5f5",
         "ticker_text_color": "#000000",
         "top_image": "shopify://shop_images/Frame_2.svg",
         "bottom_right_image": "shopify://shop_images/Frame_1.svg",
         "button_bg_color": "#000000",
-        "button_text_color": "#FFFFFF",
+        "button_text_color": "#ffffff",
         "button_hover_bg_color": "#f5d547",
         "button_hover_text_color": "#000000"
+      }
+    },
+    "custom_grid_cPKU3V": {
+      "type": "custom-grid",
+      "blocks": {
+        "product_block_jjDQpx": {
+          "type": "product_block",
+          "settings": {
+            "product": "black-leather-bag",
+            "icon_x": 24,
+            "icon_y": 62
+          }
+        },
+        "product_block_fkXGWm": {
+          "type": "product_block",
+          "settings": {
+            "product": "blue-silk-tuxedo",
+            "icon_x": 80,
+            "icon_y": 20
+          }
+        },
+        "product_block_b6Dabp": {
+          "type": "product_block",
+          "settings": {
+            "product": "chequered-red-shirt",
+            "icon_x": 80,
+            "icon_y": 20
+          }
+        },
+        "product_block_VCyi6w": {
+          "type": "product_block",
+          "settings": {
+            "product": "classic-leather-jacket",
+            "icon_x": 80,
+            "icon_y": 20
+          }
+        },
+        "product_block_p9Yfwz": {
+          "type": "product_block",
+          "settings": {
+            "product": "classic-varsity-top",
+            "icon_x": 80,
+            "icon_y": 20
+          }
+        },
+        "product_block_xCVrLa": {
+          "type": "product_block",
+          "settings": {
+            "product": "dark-denim-top",
+            "icon_x": 80,
+            "icon_y": 20
+          }
+        }
+      },
+      "block_order": [
+        "product_block_jjDQpx",
+        "product_block_fkXGWm",
+        "product_block_b6Dabp",
+        "product_block_VCyi6w",
+        "product_block_p9Yfwz",
+        "product_block_xCVrLa"
+      ],
+      "name": "Custom Grid",
+      "settings": {
+        "heading": "Tisso vison in the wild"
       }
     }
   },
   "order": [
-    "custom_banner_77RHpe"
+    "custom_banner_77RHpe",
+    "custom_grid_cPKU3V"
   ]
 }
