@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Custom Grid Section
+   Desktop: 3 columns x 2 rows, 30px gap
+   Mobile: 2 columns x 3 rows, 20px gap
+   ========================================================================== */
+
+.custom-grid {
+    width: 100%;
+    padding: 60px 40px;
+    box-sizing: border-box;
+}
+
+.custom-grid__heading {
+    text-align: center;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 400;
+    margin: 0 0 40px 0;
+}
+
+.custom-grid__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.custom-grid__item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+}
+
+.custom-grid__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.custom-grid__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    color: #999;
+    font-size: 0.85rem;
+}
+
+/* "+" trigger icon */
+.custom-grid__trigger {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    color: #000000;
+    padding: 0;
+    transition: transform 0.2s ease;
+}
+
+.custom-grid__trigger:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* ==========================================================================
+   Mobile
+   ========================================================================== */
+
+@media screen and (max-width: 749px) {
+    .custom-grid {
+        padding: 40px 16px;
+    }
+
+    .custom-grid__list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}

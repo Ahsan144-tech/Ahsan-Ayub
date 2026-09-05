@@ -1,0 +1,116 @@
+{% comment %}
+  Custom Grid Section
+  - Editable heading
+  - 6 blocks, each with a merchant-selected product
+  - Each block shows one product image with a "+" icon overlay
+  - Icon position (x/y) is customizable per block via range sliders
+  - Clicking the "+" icon opens the product popup (functionality added later)
+  - Desktop: 3 columns x 2 rows, 30px gap
+  - Mobile: 2 columns x 3 rows, 20px gap
+{% endcomment %}
+
+
+
+{{ 'custom-grid.css' | asset_url | stylesheet_tag }}
+
+<section class="custom-grid">
+
+  {% if section.settings.heading != blank %}
+    <h2 class="custom-grid__heading">{{ section.settings.heading }}</h2>
+  {% endif %}
+
+  <div class="custom-grid__list">
+    {% for block in section.blocks %}
+      {% assign product = block.settings.product %}
+      <div class="custom-grid__item" {{ block.shopify_attributes }}>
+
+        {% if product %}
+          <img
+            class="custom-grid__image"
+            src="{{ product.featured_image | image_url: width: 800 }}"
+            alt="{{ product.featured_image.alt | default: product.title }}"
+            loading="lazy"
+            width="{{ product.featured_image.width }}"
+            height="{{ product.featured_image.height }}"
+          >
+
+          <button
+            type="button"
+            class="custom-grid__trigger"
+            style="left: {{ block.settings.icon_x }}%; top: {{ block.settings.icon_y }}%;"
+            data-grid-popup-trigger
+            data-product-handle="{{ product.handle }}"
+            aria-haspopup="dialog"
+          >
+            <span aria-hidden="true">+</span>
+            <span class="visually-hidden">View {{ product.title }}</span>
+          </button>
+        {% else %}
+          <div class="custom-grid__placeholder">Select a product</div>
+        {% endif %}
+
+      </div>
+    {% endfor %}
+  </div>
+
+</section>
+{% schema %}
+{
+  "name": "Custom Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Tisso vison in the wild"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_block",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "range",
+          "id": "icon_x",
+          "label": "Icon horizontal position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "icon_y",
+          "label": "Icon vertical position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 20
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Custom Grid",
+      "blocks": [
+        { "type": "product_block" },
+        { "type": "product_block" },
+        { "type": "product_block" },
+        { "type": "product_block" },
+        { "type": "product_block" },
+        { "type": "product_block" }
+      ]
+    }
+  ]
+}
+{% endschema %}
