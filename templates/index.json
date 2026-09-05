@@ -13,15 +13,26 @@
       "type": "custom-banner",
       "name": "Custom Banner",
       "settings": {
+        "topbar_logo": "shopify://shop_images/Group_1000007777.png",
+        "topbar_brand_text": "TISSO VISON",
+        "topbar_tagline": "Find the ideal gift for your loved ones.",
+        "topbar_button_label": "CHOOSE GIFT",
+        "topbar_button_link": "",
+        "topbar_bg_color": "#f5f5f5",
+        "topbar_button_bg_color": "#f5d547",
+        "topbar_button_text_color": "#000000",
+        "topbar_button_hover_bg_color": "#000000",
+        "topbar_button_hover_text_color": "#ffffff",
         "heading": "The Gift Guide",
         "subheading": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
         "button_label": "SHOP NOW",
         "button_link": "",
         "ticker_text": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR",
-        "background_image": "shopify://shop_images/Frame.svg",
+        "ticker_bg_color": "#000000",
+        "ticker_text_color": "#ffffff",
         "button_bg_color": "#ffffff",
         "button_text_color": "#000000",
-        "button_hover_bg_color": "#F5D547",
+        "button_hover_bg_color": "#f5d547",
         "button_hover_text_color": "#000000"
       }
     }
