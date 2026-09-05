@@ -262,62 +262,81 @@
    ========================================================================== */
 
 @media screen and (max-width: 749px) {
-
-
-.custom-banner__topbar {
-        flex-wrap: wrap;
-        justify-content: center;
-        text-align: center;
+    .custom-banner__topbar-row {
         padding: 16px 20px;
-        gap: 12px;
+        justify-content: center;
+        position: relative;
     }
 
-    .custom-banner__topbar-tagline {
-        order: 3;
-        flex: 100%;
-    }
-
-    .custom-banner__topbar-button {
-        order: 2;
+    .custom-banner__topbar-toggle {
+        display: inline-flex;
+        align-items: center;
+        position: absolute;
+        left: 20px;
     }
 
     .custom-banner__topbar-brand {
-        order: 1;
-        flex: auto;
+        flex: none;
     }
+
+    .custom-banner__topbar-tagline--desktop,
+    .custom-banner__topbar-button--desktop {
+        display: none;
+    }
+
+    .custom-banner__topbar-panel {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 20px;
+        background-color: var(--topbar-bg, #F5F5F5);
+    }
+
+    .custom-banner__topbar-panel:not([hidden]) {
+        display: flex;
+    }
+
+    /* Canvas: stack as heading/subheading, then single image with button overlaid, then ticker */
     .custom-banner__canvas {
         aspect-ratio: unset;
         display: flex;
         flex-direction: column;
+        position: relative;
     }
 
-    .custom-banner__top-image,
-    .custom-banner__bottom-image,
     .custom-banner__content {
         position: relative;
         top: auto;
         left: auto;
         width: 100%;
         height: auto;
-    }
-
-    .custom-banner__top-image {
         order: 1;
-        object-position: center top;
-    }
-
-    .custom-banner__content {
-        order: 2;
         text-align: center;
-        padding: 24px 20px;
+        padding: 24px 20px 0;
     }
 
     .custom-banner__button {
-        margin: 0 auto;
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 3;
+    }
+
+    .custom-banner__top-image {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3840 / 1065;
+        object-fit: cover;
+        object-position: left top;
+        order: 2;
     }
 
     .custom-banner__bottom-image {
-        order: 3;
-        object-position: center top;
+        display: none;
     }
 }
