@@ -8,40 +8,79 @@
 {% endcomment %}
 
 {{ 'custom-banner.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'custom-banner.js' | asset_url }}" defer="defer"></script>
 
 <section class="custom-banner" style="--btn-bg: {{ section.settings.button_bg_color }}; --btn-hover-bg: {{ section.settings.button_hover_bg_color }}; --btn-text: {{ section.settings.button_text_color }}; --btn-hover-text: {{ section.settings.button_hover_text_color }}; --ticker-bg: {{ section.settings.ticker_bg_color }}; --ticker-text: {{ section.settings.ticker_text_color }};">
-    <div class="custom-banner__topbar" style="--topbar-bg: {{ section.settings.topbar_bg_color }}; --topbar-btn-bg: {{ section.settings.topbar_button_bg_color }}; --topbar-btn-text: {{ section.settings.topbar_button_text_color }}; --topbar-btn-hover-bg: {{ section.settings.topbar_button_hover_bg_color }}; --topbar-btn-hover-text: {{ section.settings.topbar_button_hover_text_color }};">
+  <div class="custom-banner__topbar" style="--topbar-bg: {{ section.settings.topbar_bg_color }}; --topbar-btn-bg: {{ section.settings.topbar_button_bg_color }}; --topbar-btn-text: {{ section.settings.topbar_button_text_color }}; --topbar-btn-hover-bg: {{ section.settings.topbar_button_hover_bg_color }}; --topbar-btn-hover-text: {{ section.settings.topbar_button_hover_text_color }};">
 
-    <div class="custom-banner__topbar-brand">
-      {% if section.settings.topbar_logo %}
-        <img
-          src="{{ section.settings.topbar_logo | image_url: width: 200 }}"
-          alt="{{ shop.name }}"
-          width="{{ section.settings.topbar_logo.width }}"
-          height="{{ section.settings.topbar_logo.height }}"
-          loading="lazy"
-        >
-      {% elsif section.settings.topbar_brand_text != blank %}
-        <span>{{ section.settings.topbar_brand_text }}</span>
+    <div class="custom-banner__topbar-row">
+      <button type="button" class="custom-banner__topbar-toggle" aria-expanded="false" aria-controls="TopbarPanel-{{ section.id }}">
+        <span class="custom-banner__topbar-icon custom-banner__topbar-icon--menu" aria-hidden="true">
+          <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 1H20" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M0 7H20" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M0 13H20" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </span>
+        <span class="custom-banner__topbar-icon custom-banner__topbar-icon--close" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L15 15" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M15 1L1 15" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </span>
+        <span class="visually-hidden">Toggle gift menu</span>
+      </button>
+
+      <div class="custom-banner__topbar-brand">
+        {% if section.settings.topbar_logo %}
+          <img
+            src="{{ section.settings.topbar_logo | image_url: width: 200 }}"
+            alt="{{ shop.name }}"
+            width="{{ section.settings.topbar_logo.width }}"
+            height="{{ section.settings.topbar_logo.height }}"
+            loading="lazy"
+          >
+        {% elsif section.settings.topbar_brand_text != blank %}
+          <span>{{ section.settings.topbar_brand_text }}</span>
+        {% endif %}
+      </div>
+
+      {% if section.settings.topbar_tagline != blank %}
+        <p class="custom-banner__topbar-tagline custom-banner__topbar-tagline--desktop">{{ section.settings.topbar_tagline }}</p>
+      {% endif %}
+
+      {% if section.settings.topbar_button_label != blank %}
+        <a href="{{ section.settings.topbar_button_link }}" class="custom-banner__topbar-button custom-banner__topbar-button--desktop">
+          <span class="custom-banner__topbar-button-bg"></span>
+          <span class="custom-banner__topbar-button-label">{{ section.settings.topbar_button_label }}</span>
+          <span class="custom-banner__topbar-button-arrow" aria-hidden="true">
+            <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 1L19 6L14 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M19 6H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </a>
       {% endif %}
     </div>
 
-    {% if section.settings.topbar_tagline != blank %}
-      <p class="custom-banner__topbar-tagline">{{ section.settings.topbar_tagline }}</p>
-    {% endif %}
+    <div class="custom-banner__topbar-panel" id="TopbarPanel-{{ section.id }}" hidden>
+      {% if section.settings.topbar_tagline != blank %}
+        <p class="custom-banner__topbar-tagline">{{ section.settings.topbar_tagline }}</p>
+      {% endif %}
 
-    {% if section.settings.topbar_button_label != blank %}
-      <a href="{{ section.settings.topbar_button_link }}" class="custom-banner__topbar-button">
-        <span class="custom-banner__topbar-button-bg"></span>
-        <span class="custom-banner__topbar-button-label">{{ section.settings.topbar_button_label }}</span>
-        <span class="custom-banner__topbar-button-arrow" aria-hidden="true">
-          <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 1L19 6L14 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M19 6H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-      </a>
-    {% endif %}
+      {% if section.settings.topbar_button_label != blank %}
+        <a href="{{ section.settings.topbar_button_link }}" class="custom-banner__topbar-button">
+          <span class="custom-banner__topbar-button-bg"></span>
+          <span class="custom-banner__topbar-button-label">{{ section.settings.topbar_button_label }}</span>
+          <span class="custom-banner__topbar-button-arrow" aria-hidden="true">
+            <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 1L19 6L14 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M19 6H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </a>
+      {% endif %}
+    </div>
 
   </div>
   
